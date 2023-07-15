@@ -1,7 +1,9 @@
+import styles from "./CalculatorForm.module.css";
+
 const CalculatorForm = () => {
   return (
-    <form className="form">
-      <div className="input-group">
+    <form className={styles.form}>
+      <div className={`${styles["input-group"]}`}>
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
           <input type="number" id="current-savings" />
@@ -11,7 +13,7 @@ const CalculatorForm = () => {
           <input type="number" id="yearly-contribution" />
         </p>
       </div>
-      <div className="input-group">
+      <div className={`${styles["input-group"]}`}>
         <p>
           <label htmlFor="expected-return">
             Expected Interest (%, per year)
@@ -23,11 +25,11 @@ const CalculatorForm = () => {
           <input type="number" id="duration" />
         </p>
       </div>
-      <p className="actions">
-        <button type="reset" className="buttonAlt">
+      <p className={styles.actions}>
+        <button type="reset" className={styles.buttonAlt}>
           Reset
         </button>
-        <button type="submit" className="button">
+        <button type="submit" className={styles.button}>
           Calculate
         </button>
       </p>
