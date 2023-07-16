@@ -1,11 +1,18 @@
-const YearlyResults = () => {
+const YearlyResults = ({ yearlyData }) => {
+  const {
+    year,
+    savingsEndOfYear,
+    yearlyInterest,
+    yearlyContribution,
+    totalInterest,
+  } = yearlyData;
   return (
     <tr>
-      <td>YEAR NUMBER</td>
-      <td>TOTAL SAVINGS END OF YEAR</td>
-      <td>INTEREST GAINED IN YEAR</td>
-      <td>TOTAL INTEREST GAINED</td>
-      <td>TOTAL INVESTED CAPITAL</td>
+      <td>{year}</td>
+      <td>{savingsEndOfYear}</td>
+      <td>{yearlyInterest}</td>
+      <td>{totalInterest}</td>
+      <td>{yearlyContribution * year}</td>
     </tr>
   );
 };

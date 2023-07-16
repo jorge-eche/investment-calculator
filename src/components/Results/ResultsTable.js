@@ -1,7 +1,7 @@
 import YearlyResults from "./YearlyResults";
 import styles from "./ResultsTable.module.css";
 
-const ResultsTable = () => {
+const ResultsTable = ({ finalCalculation }) => {
   return (
     <table className={styles.result}>
       <thead>
@@ -14,7 +14,9 @@ const ResultsTable = () => {
         </tr>
       </thead>
       <tbody>
-        <YearlyResults />
+        {finalCalculation.map((yearlyData) => (
+          <YearlyResults key={yearlyData.year} yearlyData={yearlyData} />
+        ))}
       </tbody>
     </table>
   );
