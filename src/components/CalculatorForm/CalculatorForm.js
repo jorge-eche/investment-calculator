@@ -1,45 +1,33 @@
 import { useState } from "react";
 import styles from "./CalculatorForm.module.css";
 
-const CalculatorForm = ({ calculateHandler }) => {
+const CalculatorForm = ({ calculateHandler, resetFinalCalculation }) => {
   const [formData, setFormData] = useState({
-    currentSavings: 0,
-    yearlySavings: 0,
-    expectedInterest: 0,
-    investmentDuration: 0,
+    "current-savings": 0,
+    "yearly-contribution": 0,
+    "expected-return": 0,
+    duration: 0,
   });
-  const currentSavingsHandler = (event) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      currentSavings: event.target.value,
-    }));
-  };
 
-  const yearlySavingsHandler = (event) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      yearlySavings: event.target.value,
-    }));
-  };
-
-  const expectedInterestHandler = (event) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      expectedInterest: event.target.value,
-    }));
-  };
-
-  const investmentDurationHandler = (event) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      investmentDuration: event.target.value,
-    }));
+  const inputChangeHandler = (input, value) => {
+    setFormData((prevInput) => {
+      return { ...prevInput, [input]: value };
+    });
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if (formData.investmentDuration > 0) {
+    if (formData.duration > 0) {
       calculateHandler(formData);
+    }
+  };
+
+  const resetHandler = (event) => {
+    const confirmReset = window.confirm("Do you want to reset the form?");
+
+    if (confirmReset) {
+      setFormData([]);
+      resetFinalCalculation();
     }
   };
 
@@ -51,7 +39,9 @@ const CalculatorForm = ({ calculateHandler }) => {
           <input
             type="number"
             id="current-savings"
-            onChange={currentSavingsHandler}
+            onChange={(event) =>
+              inputChangeHandler("current-savings", event.target.value)
+            }
           />
         </p>
         <p>
@@ -59,7 +49,9 @@ const CalculatorForm = ({ calculateHandler }) => {
           <input
             type="number"
             id="yearly-contribution"
-            onChange={yearlySavingsHandler}
+            onChange={(event) =>
+              inputChangeHandler("yearly-contribution", event.target.value)
+            }
           />
         </p>
       </div>
@@ -71,7 +63,9 @@ const CalculatorForm = ({ calculateHandler }) => {
           <input
             type="number"
             id="expected-return"
-            onChange={expectedInterestHandler}
+            onChange={(event) =>
+              inputChangeHandler("expected-return", event.target.value)
+            }
           />
         </p>
         <p>
@@ -79,12 +73,18 @@ const CalculatorForm = ({ calculateHandler }) => {
           <input
             type="number"
             id="duration"
-            onChange={investmentDurationHandler}
+            onChange={(event) =>
+              inputChangeHandler("duration", event.target.value)
+            }
           />
         </p>
       </div>
       <p className={styles.actions}>
-        <button type="reset" className={styles.buttonAlt}>
+        <button
+          type="reset"
+          className={styles.buttonAlt}
+          onClick={resetHandler}
+        >
           Reset
         </button>
         <button type="submit" className={styles.button}>

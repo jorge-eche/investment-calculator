@@ -1,3 +1,10 @@
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 const YearlyResults = ({ yearlyData }) => {
   const {
     year,
@@ -9,10 +16,10 @@ const YearlyResults = ({ yearlyData }) => {
   return (
     <tr>
       <td>{year}</td>
-      <td>{savingsEndOfYear}</td>
-      <td>{yearlyInterest}</td>
-      <td>{totalInterest}</td>
-      <td>{yearlyContribution * year}</td>
+      <td>{formatter.format(savingsEndOfYear)}</td>
+      <td>{formatter.format(yearlyInterest)}</td>
+      <td>{formatter.format(totalInterest)}</td>
+      <td>{formatter.format(yearlyContribution * year)}</td>
     </tr>
   );
 };
