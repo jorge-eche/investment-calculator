@@ -11,7 +11,7 @@ const CalculatorForm = ({ calculateHandler, resetFinalCalculation }) => {
 
   const inputChangeHandler = (input, value) => {
     setFormData((prevInput) => {
-      return { ...prevInput, [input]: value };
+      return { ...prevInput, [input]: +value };
     });
   };
 
